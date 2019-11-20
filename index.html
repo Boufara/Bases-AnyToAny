@@ -43,13 +43,19 @@
 	}
 
 	function DeciToAny(decimal, base){
-		var n = decimal, finalNumber = "";
+		var n = Math.trunc(decimal), v = decimal - Math.trunc(decimal), finalNumber = "", final_V_Number = (v != 0) ? "." : "";
+		
 		do{
-			finalNumber = ((n % base) <= 9 ? (n % base) : (n % base <= 35 ? String.fromCharCode(55 + (n % base)) : String.fromCharCode(61 + (n % base)))) + finalNumber;
+			finalNumber = ((n % base) <= 9 ? (n % base) : String.fromCharCode((n % base <= 35 ? 55 : 61) + (n % base))) + finalNumber;
 			n = Math.trunc(n / base);
 		} while(n != 0);
 
-		return finalNumber;
+		while(v != 0){
+			final_V_Number += "" + (v * base) <= 9 ? Math.trunc(v * base) : String.fromCharCode((v * base <= 35 ? 55 : 61) + Math.trunc(v * base));
+			v = (v * base) - Math.trunc(v * base);
+		}
+
+		return finalNumber + final_V_Number;
 	}
 </script>
 
