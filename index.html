@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bases</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<table>
+		<tr>
+			<td><label>Decimal :</label></td>
+			<td><input onchange="Convertir()" type="number" name="decimal" id="decimal" value="0"></td>			
+		</tr>
+		<tr>
+			<td><button onclick="Convertir()">Convertir</button></td>
+		</tr>
+		<tr>
+			<td>Binaire :</td>
+			<td colspan="2"><div id="binaire">0</div></td>
+		</tr>
+		<tr>
+			<td>Octal :</td>
+			<td colspan="2"><div id="octal">0</div></td>
+		</tr>
+		<tr>
+			<td>Hexadecimal :</td>
+			<td colspan="2"><div id="hexa">0</div></td>
+		</tr>
+		<tr>
+			<td>Base 62 :</td>
+			<td colspan="2"><div id="b62">0</div></td>
+		</tr>
+	</table>
+
+<script>
+	function Convertir(){
+		var decimal = document.getElementById("decimal").value;
+		document.getElementById("decimal").focus();
+		
+		document.getElementById("binaire").innerHTML = DeciToAny(decimal, 2);
+		document.getElementById("octal").innerHTML = DeciToAny(decimal, 8);
+		document.getElementById("hexa").innerHTML = DeciToAny(decimal, 16);
+		document.getElementById("b62").innerHTML = DeciToAny(decimal, 62);
+	}
+
+	function DeciToAny(decimal, base){
+		var n = decimal, finalNumber = "";
+		do{
+			finalNumber = ((n % base) <= 9 ? (n % base) : (n % base <= 35 ? String.fromCharCode(55 + (n % base)) : String.fromCharCode(61 + (n % base)))) + finalNumber;
+			n = Math.trunc(n / base);
+		} while(n != 0);
+
+		return finalNumber;
+	}
+</script>
+
+</body>
+</html>
