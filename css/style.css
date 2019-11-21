@@ -1,0 +1,21 @@
+body{
+	letter-spacing: 1px;
+}
+
+table, td{
+	border: 1px solid black;
+	padding: 6px;
+}
+
+table{
+	border-collapse: collapse;
+}
+
+.imp{
+	color: red;
+	font-weight: bold;
+}
+
+.deci{
+	font-weight: bold;
+}

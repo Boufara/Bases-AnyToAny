@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bases</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<table>
+		<tr>
+			<td><b>Bases</b></td>
+			<td><b>Surnoms</b></td>
+			<td><b>Equivalences</b></td>
+		</tr>
+		<tr class="deci">
+			<td>10</td>
+			<td><label>Decimal</label></td>
+			<td><input onchange="Convertir()" type="number" name="decimal" id="decimal" value="0"></td>			
+		</tr>
+		<tr class="imp">
+			<td>2</td>
+			<td>Binaire</td>
+			<td colspan="2"><div id="binaire">0</div></td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>Ternaire</td>
+			<td colspan="2"><div id="ternaire">0</div></td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>Quaternaire</td>
+			<td colspan="2"><div id="quaternaire">0</div></td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>Quinaire</td>
+			<td colspan="2"><div id="quinaire">0</div></td>
+		</tr>
+		<tr>
+			<td>6</td>
+			<td>Sénaire</td>
+			<td colspan="2"><div id="senaire">0</div></td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td>Septénaire</td>
+			<td colspan="2"><div id="septenaire">0</div></td>
+		</tr>
+		<tr class="imp">
+			<td>8</td>
+			<td>Octal</td>
+			<td colspan="2"><div id="octal">0</div></td>
+		</tr>
+		<tr>
+			<td>9</td>
+			<td>Nonaire</td>
+			<td colspan="2"><div id="nonaire">0</div></td>
+		</tr>
+		<tr>
+			<td>12</td>
+			<td>Duodécimal</td>
+			<td colspan="2"><div id="duodecimal">0</div></td>
+		</tr>
+		<tr>
+			<td>13</td>
+			<td>Tridécimal</td>
+			<td colspan="2"><div id="tridecimal">0</div></td>
+		</tr>
+		<tr class="imp">
+			<td>16</td>
+			<td>Hexadecimal</td>
+			<td colspan="2"><div id="hexa">0</div></td>
+		</tr>
+		<tr>
+			<td>20</td>
+			<td>Vicésimal</td>
+			<td colspan="2"><div id="vicesimal">0</div></td>
+		</tr>
+		<tr>
+			<td>32</td>
+			<td>Base32</td>
+			<td colspan="2"><div id="b32">0</div></td>
+		</tr>
+		<tr class="imp">
+			<td>36</td>
+			<td>Base36</td>
+			<td colspan="2"><div id="b36">0</div></td>
+		</tr>
+		<tr>
+			<td>60</td>
+			<td>Sexagésimal</td>
+			<td colspan="2"><div id="sexagesimal">0</div></td>
+		</tr>
+		<tr class="imp">
+			<td>62</td>
+			<td>Base62</td>
+			<td colspan="2"><div id="b62">0</div></td>
+		</tr>
+	</table>
+
+<script>
+	function Convertir(){
+		var decimal = document.getElementById("decimal").value;
+		document.getElementById("decimal").focus();
+		
+		document.getElementById("binaire").innerHTML = DeciToAny(decimal, 2);
+		document.getElementById("ternaire").innerHTML = DeciToAny(decimal, 3);
+		document.getElementById("quaternaire").innerHTML = DeciToAny(decimal, 4);
+		document.getElementById("quinaire").innerHTML = DeciToAny(decimal, 5);
+		document.getElementById("senaire").innerHTML = DeciToAny(decimal, 6);
+		document.getElementById("septenaire").innerHTML = DeciToAny(decimal, 7);
+		document.getElementById("octal").innerHTML = DeciToAny(decimal, 8);
+		document.getElementById("nonaire").innerHTML = DeciToAny(decimal, 9);
+		document.getElementById("duodecimal").innerHTML = DeciToAny(decimal, 12);
+		document.getElementById("tridecimal").innerHTML = DeciToAny(decimal, 13);
+		document.getElementById("hexa").innerHTML = DeciToAny(decimal, 16);
+		document.getElementById("vicesimal").innerHTML = DeciToAny(decimal, 20);
+		document.getElementById("b32").innerHTML = DeciToAny(decimal, 32);
+		document.getElementById("b36").innerHTML = DeciToAny(decimal, 36);
+		document.getElementById("sexagesimal").innerHTML = DeciToAny(decimal, 60);
+		document.getElementById("b62").innerHTML = DeciToAny(decimal, 62);
+	}
+
+	function DeciToAny(decimal, base){
+		var n = Math.trunc(decimal), v = decimal - Math.trunc(decimal), finalNumber = "", final_V_Number = (v != 0) ? "." : "";
+		do{
+			finalNumber = ((n % base) <= 9 ? (n % base) : String.fromCharCode((n % base <= 35 ? 55 : 61) + (n % base))) + finalNumber;
+			n = Math.trunc(n / base);
+		} while(n != 0);
+
+		while(v != 0){
+			final_V_Number += "" + (v * base) < 10 ? Math.trunc(v * base) : String.fromCharCode((v * base <= 35 ? 55 : 61) + Math.trunc(v * base));
+			v = (v * base) - Math.trunc(v * base);
+		}
+
+		return finalNumber + final_V_Number;
+	}
+</script>
+
+</body>
+</html>
