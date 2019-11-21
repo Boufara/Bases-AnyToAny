@@ -122,20 +122,24 @@
 	}
 
 	function DeciToAny(decimal, base){
+		var signed = "";
+		if (decimal < 0){
+			decimal *= -1;
+			signed = "-";
+		}
+
 		var n = Math.trunc(decimal), v = decimal - Math.trunc(decimal), finalNumber = "", final_V_Number = (v != 0) ? "." : "";
 		do{
 			finalNumber = ((n % base) <= 9 ? (n % base) : String.fromCharCode((n % base <= 35 ? 55 : 61) + (n % base))) + finalNumber;
 			n = Math.trunc(n / base);
 		} while(n != 0);
 
-		var i = 0;
-		while(v != 0 && i < 1000){
+		for (var i = 0; v != 0 && i < 1000; i++) {
 			final_V_Number += (v * base) < 10 ? Math.trunc(v * base) : String.fromCharCode((v * base <= 35 ? 55 : 61) + Math.trunc(v * base));
 			v = (v * base) - Math.trunc(v * base);
-			i++;
 		}
 
-		return finalNumber + final_V_Number;
+		return signed + finalNumber + final_V_Number;
 	}
 </script>
 
