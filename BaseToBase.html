@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bases</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+<h1>Base To Base</h1>
+<table>
+	<th>
+		<td>Bases</td>
+		<td>Equivalences</td>
+	</th>
+	<tr>
+		<td>Source</td>
+		<td><input onchange="Convertir()" type="number" id="baseIn" value="10" min="2" max="62"></td>
+		<td><input onchange="Convertir()" type="text" id="in" value="0"></td>
+	</tr>
+	<tr>
+		<td>Destination</td>
+		<td><input onchange="Convertir()" type="number" id="baseOut" value="16" min="2" max="62"></td>
+		<td><div id="out">0</div></td>
+	</tr>
+</table>
+<a href="index.html">Décimal to any</a>
+
+<script>
+	function Convertir(){
+		var number = document.getElementById("in").value;
+		var bIn = document.getElementById("baseIn").value;
+		var bOut = document.getElementById("baseOut").value;
+		document.getElementById("out").innerHTML = BaseToBase(number, bIn, bOut);
+	}
+
+	function BaseToBase(number, bIn, bOut){
+		var signed = number[0] == "-", entier = number.split(".")[0], vrg_num = number.split(".")[1];
+		var decimal = 0, deci_vrg = 0, finalNumber = "", final_v_number = "";
+
+		//---------------------------------BaseIn To decimal (entier)
+		for (var i = signed ? 1 : 0; i < entier.length; i++) {
+			var code = entier.charCodeAt(i);
+			code -= code >= 97 ? 61 : code >= 65 ? 55 : 48;
+			decimal += code * Math.pow(bIn, entier.length - i - 1);
+		}
+
+		//---------------------------------Decimal to baseOut (entier)
+		do{
+			finalNumber = ((decimal % bOut) <= 9 ? (decimal % bOut) : String.fromCharCode((decimal % bOut <= 35 ? 55 : 61) + (decimal % bOut))) + finalNumber;
+			decimal = Math.trunc(decimal / bOut);
+		} while (decimal != 0);
+
+		//---------------------------------BaseIn To decimal (virgule)
+		if(vrg_num != null){
+			for (var i = vrg_num.length -1, code; i >= 0 ; i--) {
+				code = vrg_num.charCodeAt(i);
+				code -= code >= 97 ? 61 : code >= 65 ? 55 : 48;
+				deci_vrg = (deci_vrg + code) / bIn;
+			}
+		//---------------------------------Decimal to baseOut (virgule)
+			while (deci_vrg != 0 && final_v_number.length < 1000) {
+				final_v_number += (deci_vrg * bOut) < 10 ? Math.trunc(deci_vrg * bOut) : String.fromCharCode((deci_vrg * bOut <= 35 ? 55 : 61) + Math.trunc(deci_vrg * bOut));
+				deci_vrg = (deci_vrg * bOut) - Math.trunc(deci_vrg * bOut);
+			}
+			final_v_number = "." + final_v_number;
+		}
+
+		return (signed ? "-" : "") + finalNumber + final_v_number;
+	}
+</script>
+
+</body>
+</html>
