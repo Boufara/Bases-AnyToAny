@@ -30,7 +30,26 @@
 		var number = document.getElementById("in").value;
 		var bIn = document.getElementById("baseIn").value;
 		var bOut = document.getElementById("baseOut").value;
-		document.getElementById("out").innerHTML = BaseToBase(number, bIn, bOut);
+
+		if (CheckInputBase(number, bIn)) {
+			var number = document.getElementById("in").value;
+			document.getElementById("out").innerHTML = BaseToBase(number, bIn, bOut);
+		}
+		else
+			alert("Number out of base");
+	}
+
+	function CheckInputBase(number, base){
+		number += "";
+		var signed = number[0] == "-";
+		for (var i = signed ? 1 : 0; i < number.length ; i++) {
+			var code = number.charCodeAt(i);
+			if(code != ".".charCodeAt(0)){				
+				code -= code >= 97 ? 61 : code >= 65 ? 55 : 48;
+				if (code < 0 || code >= base) return false;		
+			}
+		}
+		return true && number.split(".").length <= 2;
 	}
 
 	function BaseToBase(number, bIn, bOut){
