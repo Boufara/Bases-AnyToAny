@@ -1,18 +1,56 @@
 body{
 	letter-spacing: 1px;
+	color: white;
+	font-family: "consolas";
+	background-color: rgba(80, 80, 80, 0.5);
+	padding: 20px;
+	padding-top: 0;
+	margin: 0;
 }
 
-table, td{
-	border: 1px solid black;
-	padding: 6px;
+h1, footer{
+	background-color: gray;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 table{
 	border-collapse: collapse;
 }
 
+.miniTable{
+	font-size: 1.5em;
+}
+
+.miniTable td{
+	padding: 10px;
+}
+
+input{
+	font-size: 1em;	
+	font-family: "consolas";
+	font-weight: bold;
+	letter-spacing: 1px;
+	background-color: rgba(255, 255, 255, .8);
+	width: 240px;
+}
+
+table, td{
+	border: 1px solid black;
+	padding: 4px;
+	background-color: rgba(80, 80, 80, 0.5);
+}
+
+.tr_title{
+	background-color: rgba(80, 80, 80, 1);
+}
+
+.col_equivalence{
+	width: 100%;
+}
+
 .imp{
-	color: red;
+	color: rgba(100, 220, 100, 1);
 	font-weight: bold;
 }
 
