@@ -6,8 +6,8 @@
 </head>
 <body>
 
-<h1>Base To Base</h1>
-<table>
+<center><h1>Base To Base</h1></center>
+<table class="miniTable">
 	<th>
 		<td>Bases</td>
 		<td>Equivalences</td>
@@ -24,6 +24,10 @@
 	</tr>
 </table>
 <a href="index.html">Décimal to any</a>
+
+<footer>
+	<center><p>copyright ©2019 BOUFARA Mustapha</p></center>
+</footer>
 
 <script>
 	function Convertir(){
@@ -76,7 +80,7 @@
 				code -= code >= 97 ? 61 : code >= 65 ? 55 : 48;
 				deci_vrg = (deci_vrg + code) / bIn;
 			}
-		//---------------------------------Decimal to baseOut (virgule)
+			//-----------------------------Decimal to baseOut (virgule)
 			while (deci_vrg != 0 && final_v_number.length < 1000) {
 				final_v_number += (deci_vrg * bOut) < 10 ? Math.trunc(deci_vrg * bOut) : String.fromCharCode((deci_vrg * bOut <= 35 ? 55 : 61) + Math.trunc(deci_vrg * bOut));
 				deci_vrg = (deci_vrg * bOut) - Math.trunc(deci_vrg * bOut);

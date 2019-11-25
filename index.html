@@ -5,15 +5,16 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+	<center><h1>Les Equivalences du décimal</h1></center>
 	<table>
-		<tr>
+		<tr class="tr_title">
 			<td><b>Bases</b></td>
 			<td><b>Surnoms</b></td>
-			<td><b>Equivalences</b></td>
+			<td class="col_equivalence"><b>Equivalences</b></td>
 		</tr>
 		<tr class="deci">
 			<td>10</td>
-			<td><label>Decimal</label></td>
+			<td><label>Décimal</label></td>
 			<td><input onchange="Convertir()" type="number" name="decimal" id="decimal" value="0"></td>			
 		</tr>
 		<tr class="imp">
@@ -99,6 +100,10 @@
 	</table>
 
 <a href="BaseToBase.html">Base To Base</a>
+
+<footer>
+	<center><p>copyright ©2019 BOUFARA Mustapha</p></center>
+</footer>
 
 <script>
 	function Convertir(){
